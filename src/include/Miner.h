@@ -10,6 +10,8 @@ using std::shared_ptr;
 
 class State;
 
+typedef State* StatePtr;
+
 const int ComfortLevel = 5;
 const int MaxGold = 3;
 const int ThirstLevel = 5;
@@ -17,7 +19,7 @@ const int TiredThreshold = 5;
 
 class Miner : public BaseGameEntity {
  private:
-  shared_ptr<State> currentState;
+  StatePtr currentState;
   location_type location;
   int goldCarried;
   int goldInBank;
@@ -27,7 +29,7 @@ class Miner : public BaseGameEntity {
  public:
   Miner(int id);
   void Update();
-  void ChangeState(shared_ptr<State> newState);
+  void ChangeState(StatePtr newState);
 
   location_type Location() const { return location; }
   void ChangeLocation(const location_type loc) { location = loc; }
@@ -45,7 +47,7 @@ class Miner : public BaseGameEntity {
   void SetWealth(const int wealth) { goldInBank = wealth; }
   void AddToWealth(const int wealth);
 
-  bool Thirsty() const { return thirst < ThirstLevel; };
+  bool Thirsty() const { return thirst > ThirstLevel; };
   void BuyAndDrinkWhiskey();
 };
 

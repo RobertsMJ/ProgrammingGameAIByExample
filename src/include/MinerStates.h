@@ -18,7 +18,7 @@ class EnterMineAndDigForNugget : public State {
   EnterMineAndDigForNugget& operator=(const EnterMineAndDigForNugget&);
 
  public:
-  static shared_ptr<EnterMineAndDigForNugget> Instance();
+  static EnterMineAndDigForNugget* Instance();
   virtual void Enter(MinerPtr miner);
   virtual void Execute(MinerPtr miner);
   virtual void Exit(MinerPtr miner);
@@ -34,7 +34,7 @@ class VisitBankAndDepositGold : public State {
   VisitBankAndDepositGold& operator=(const VisitBankAndDepositGold&);
 
  public:
-  static shared_ptr<VisitBankAndDepositGold> Instance();
+  static VisitBankAndDepositGold* Instance();
   virtual void Enter(MinerPtr miner);
   virtual void Execute(MinerPtr miner);
   virtual void Exit(MinerPtr miner);
@@ -48,7 +48,7 @@ class GoHomeAndSleepTilRested : public State {
   GoHomeAndSleepTilRested& operator=(const GoHomeAndSleepTilRested&);
 
  public:
-  static shared_ptr<GoHomeAndSleepTilRested> Instance();
+  static GoHomeAndSleepTilRested* Instance();
   virtual void Enter(MinerPtr miner);
   virtual void Execute(MinerPtr miner);
   virtual void Exit(MinerPtr miner);
@@ -62,7 +62,7 @@ class QuenchThirst : public State {
   QuenchThirst& operator=(const QuenchThirst&);
 
  public:
-  static shared_ptr<QuenchThirst> Instance();
+  static QuenchThirst* Instance();
   virtual void Enter(MinerPtr miner);
   virtual void Execute(MinerPtr miner);
   virtual void Exit(MinerPtr miner);

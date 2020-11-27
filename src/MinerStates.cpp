@@ -10,10 +10,9 @@ using std::make_shared;
 #include "include/State.h"
 
 // EnterMineAndDigForNugget
-shared_ptr<EnterMineAndDigForNugget> EnterMineAndDigForNugget::Instance() {
-  static shared_ptr<EnterMineAndDigForNugget> instance(
-      new EnterMineAndDigForNugget);
-  return instance;
+EnterMineAndDigForNugget* EnterMineAndDigForNugget::Instance() {
+  static EnterMineAndDigForNugget instance;
+  return &instance;
 }
 
 void EnterMineAndDigForNugget::Enter(MinerPtr miner) {
@@ -43,10 +42,9 @@ void EnterMineAndDigForNugget::Exit(MinerPtr miner) {
 }
 
 // VisitBankAndDepositGold
-shared_ptr<VisitBankAndDepositGold> VisitBankAndDepositGold::Instance() {
-  static shared_ptr<VisitBankAndDepositGold> instance(
-      new VisitBankAndDepositGold());
-  return instance;
+VisitBankAndDepositGold* VisitBankAndDepositGold::Instance() {
+  static VisitBankAndDepositGold instance;
+  return &instance;
 }
 
 void VisitBankAndDepositGold::Enter(MinerPtr miner) {
@@ -64,6 +62,7 @@ void VisitBankAndDepositGold::Execute(MinerPtr miner) {
     cout << "Miner: Has enough money" << endl;
     miner->ChangeState(GoHomeAndSleepTilRested::Instance());
   } else {
+    cout << "Miner: Going back to work" << endl;
     miner->ChangeState(EnterMineAndDigForNugget::Instance());
   }
 }
@@ -73,10 +72,9 @@ void VisitBankAndDepositGold::Exit(MinerPtr miner) {
 }
 
 // GoHomeAndSleepTilRested
-shared_ptr<GoHomeAndSleepTilRested> GoHomeAndSleepTilRested::Instance() {
-  static shared_ptr<GoHomeAndSleepTilRested> instance(
-      new GoHomeAndSleepTilRested());
-  return instance;
+GoHomeAndSleepTilRested* GoHomeAndSleepTilRested::Instance() {
+  static GoHomeAndSleepTilRested instance;
+  return &instance;
 }
 
 void GoHomeAndSleepTilRested::Enter(MinerPtr miner) {
@@ -101,9 +99,9 @@ void GoHomeAndSleepTilRested::Exit(MinerPtr miner) {
 }
 
 // QuenchThirst
-shared_ptr<QuenchThirst> QuenchThirst::Instance() {
-  static shared_ptr<QuenchThirst> instance(new QuenchThirst());
-  return instance;
+QuenchThirst* QuenchThirst::Instance() {
+  static QuenchThirst instance;
+  return &instance;
 }
 
 void QuenchThirst::Enter(MinerPtr miner) {

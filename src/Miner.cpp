@@ -11,7 +11,7 @@ Miner::Miner(int id)
       fatigue(0),
       currentState(GoHomeAndSleepTilRested::Instance()) {}
 
-void Miner::ChangeState(shared_ptr<State> newState) {
+void Miner::ChangeState(StatePtr newState) {
   currentState->Exit(this);
   currentState = newState;
   currentState->Enter(this);
@@ -34,7 +34,5 @@ void Miner::BuyAndDrinkWhiskey() {
 
 void Miner::Update() {
   thirst++;
-  if (currentState) {
-    currentState->Execute(this);
-  }
+  currentState->Execute(this);
 }
