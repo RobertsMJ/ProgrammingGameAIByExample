@@ -2,10 +2,18 @@
 #define __MINER_H
 
 #include <memory>
+using std::enable_shared_from_this;
 using std::shared_ptr;
 
 #include "BaseGameEntity.h"
-#include "State.h"
+#include "Locations.h"
+
+class State;
+
+const int ComfortLevel = 5;
+const int MaxGold = 3;
+const int ThirstLevel = 5;
+const int TiredThreshold = 5;
 
 class Miner : public BaseGameEntity {
  private:
@@ -20,6 +28,25 @@ class Miner : public BaseGameEntity {
   Miner(int id);
   void Update();
   void ChangeState(shared_ptr<State> newState);
+
+  location_type Location() const { return location; }
+  void ChangeLocation(const location_type loc) { location = loc; }
+
+  int GoldCarried() const { return goldCarried; }
+  void SetGoldCarried(const int gold) { goldCarried = gold; }
+  void AddToGoldCarried(const int gold);
+  bool PocketsFull() const { return goldCarried >= MaxGold; }
+
+  bool Fatigued() const { return fatigue > TiredThreshold; };
+  void DecreaseFatigue() { fatigue--; }
+  void IncreateFatigue() { fatigue++; }
+
+  int Wealth() const { return goldInBank; }
+  void SetWealth(const int wealth) { goldInBank = wealth; }
+  void AddToWealth(const int wealth);
+
+  bool Thirsty() const { return thirst < ThirstLevel; };
+  void BuyAndDrinkWhiskey();
 };
 
 #endif
