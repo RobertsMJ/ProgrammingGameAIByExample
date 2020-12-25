@@ -7,10 +7,10 @@ using std::shared_ptr;
 
 #include "BaseGameEntity.h"
 #include "Locations.h"
+#include "State.h"
 
-class State;
-
-typedef State* StatePtr;
+class Miner;
+typedef State<Miner>* StatePtr;
 
 const int ComfortLevel = 5;
 const int MaxGold = 3;

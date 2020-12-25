@@ -11,7 +11,7 @@ typedef Miner* MinerPtr;
 // Miner walks to gold mine + picks up a nugget of gold
 // If he has a nugget, transition to VisitBankAndDepositGold
 // If thirsty, transition to QuenchThirst
-class EnterMineAndDigForNugget : public State {
+class EnterMineAndDigForNugget : public State<Miner> {
  private:
   EnterMineAndDigForNugget() {}
   EnterMineAndDigForNugget(const EnterMineAndDigForNugget&);
@@ -27,7 +27,7 @@ class EnterMineAndDigForNugget : public State {
 // Miner goes to bank and deposits his gold
 // If wealthy enough, go home
 // Otherwise, get more gold
-class VisitBankAndDepositGold : public State {
+class VisitBankAndDepositGold : public State<Miner> {
  private:
   VisitBankAndDepositGold() {}
   VisitBankAndDepositGold(const VisitBankAndDepositGold&);
@@ -41,7 +41,7 @@ class VisitBankAndDepositGold : public State {
 };
 
 // Miner goes home and sleeps until fatigue is sufficiently low
-class GoHomeAndSleepTilRested : public State {
+class GoHomeAndSleepTilRested : public State<Miner> {
  private:
   GoHomeAndSleepTilRested() {}
   GoHomeAndSleepTilRested(const GoHomeAndSleepTilRested&);
@@ -55,7 +55,7 @@ class GoHomeAndSleepTilRested : public State {
 };
 
 // hit the bar
-class QuenchThirst : public State {
+class QuenchThirst : public State<Miner> {
  private:
   QuenchThirst() {}
   QuenchThirst(const QuenchThirst&);
