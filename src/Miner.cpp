@@ -9,12 +9,12 @@ Miner::Miner(int id)
       goldInBank(0),
       thirst(0),
       fatigue(0),
-      currentState(GoHomeAndSleepTilRested::Instance()) {}
+      stateMachine(StateMachine<Miner>(this)) {
+  stateMachine.SetCurrentState(GoHomeAndSleepTilRested::Instance());
+}
 
 void Miner::ChangeState(StatePtr newState) {
-  currentState->Exit(this);
-  currentState = newState;
-  currentState->Enter(this);
+  stateMachine.ChangeState(newState);
 }
 
 void Miner::AddToGoldCarried(const int gold) {
@@ -34,5 +34,5 @@ void Miner::BuyAndDrinkWhiskey() {
 
 void Miner::Update() {
   thirst++;
-  currentState->Execute(this);
+  stateMachine.Update();
 }

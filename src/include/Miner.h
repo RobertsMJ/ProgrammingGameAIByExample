@@ -8,6 +8,7 @@ using std::shared_ptr;
 #include "BaseGameEntity.h"
 #include "Locations.h"
 #include "State.h"
+#include "StateMachine.h"
 
 class Miner;
 typedef State<Miner>* StatePtr;
@@ -19,12 +20,12 @@ const int TiredThreshold = 5;
 
 class Miner : public BaseGameEntity {
  private:
-  StatePtr currentState;
   location_type location;
   int goldCarried;
   int goldInBank;
   int thirst;
   int fatigue;
+  StateMachine<Miner> stateMachine;
 
  public:
   Miner(int id);
